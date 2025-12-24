@@ -3,9 +3,9 @@ from parser import parse_info
 from poster import generate_poster
 import os
 
-API_ID = 123456
-API_HASH = "YOUR_API_HASH"
-BOT_TOKEN = "YOUR_BOT_TOKEN"
+API_ID = 7721764
+API_HASH = "a9c08aae19aa4c8b37ff658d1951a1f7"
+BOT_TOKEN = "1955186176:AAFa4GFgiUvERzmAp4Jo_E-_q_iT3xBRfM8"
 
 app = Client("posterbot", api_id=API_ID, api_hash=API_HASH, bot_token=BOT_TOKEN)
 
