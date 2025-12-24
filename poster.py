@@ -48,7 +48,9 @@ def generate_poster(bg_path, data, character_path, output="final.png"):
     bg = Image.open(bg_path).convert("RGBA").resize((WIDTH, HEIGHT))
     bg = bg.filter(ImageFilter.GaussianBlur(2))
 
-    template = Image.open("1000042652-removebg-preview.png").convert("RGBA")
+    template = Image.open("templates/1000042652-removebg-preview.png").convert("RGBA")
+    template = template.resize((WIDTH, HEIGHT))
+
     canvas = Image.alpha_composite(bg, template)
     draw = ImageDraw.Draw(canvas)
 
