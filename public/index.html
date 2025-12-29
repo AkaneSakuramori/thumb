@@ -6,15 +6,20 @@
 <body>
   <h2>Generate Poster</h2>
 
-  <form action="/generate" method="post">
-    <input name="title" placeholder="Title"><br><br>
-    <input name="subtitle" placeholder="Subtitle"><br><br>
-    <input name="tag" placeholder="Vertical Tag"><br><br>
-    <textarea name="synopsis" placeholder="Synopsis"></textarea><br><br>
-    <input name="accentColor" placeholder="#F4A7B9"><br><br>
+  <form action="/generate" method="post" enctype="multipart/form-data">
+    <input name="title" placeholder="Title" required><br><br>
+    <input name="subtitle" placeholder="Subtitle" required><br><br>
+    <input name="tag" placeholder="Vertical Tag" required><br><br>
 
-    <input name="backgroundImage" value="/assets/backgrounds/lil-miss-bg.jpg"><br><br>
-    <input name="characterImage" value="/assets/characters/lil-miss.png"><br><br>
+    <textarea name="synopsis" placeholder="Synopsis" required></textarea><br><br>
+
+    <input name="accentColor" placeholder="#F4A7B9" required><br><br>
+
+    <label>Background Image</label><br>
+    <input type="file" name="backgroundImage" accept="image/*" required><br><br>
+
+    <label>Character Image</label><br>
+    <input type="file" name="characterImage" accept="image/*" required><br><br>
 
     <button type="submit">Generate</button>
   </form>
