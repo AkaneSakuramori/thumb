@@ -1,52 +1,124 @@
+/* =====================
+   Global Variables
+===================== */
 :root {
   --accent: #f4a7b9;
 }
 
-body {
-  margin: 0;
-  background-size: cover;
-  background-position: center;
-  font-family: Arial, sans-serif;
+/* =====================
+   Fonts (GLOBAL /fonts)
+===================== */
+@font-face {
+  font-family: "Poppins";
+  src: url("/fonts/Poppins-Regular.ttf") format("truetype");
+  font-weight: 400;
 }
 
+@font-face {
+  font-family: "Poppins";
+  src: url("/fonts/Poppins-Bold.ttf") format("truetype");
+  font-weight: 700;
+}
+
+/* =====================
+   Base
+===================== */
+body {
+  margin: 0;
+  width: 1280px;
+  height: 720px;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  font-family: "Poppins", sans-serif;
+}
+
+/* =====================
+   Poster Layout
+===================== */
 .poster {
   width: 1280px;
   height: 720px;
   display: flex;
 }
 
+/* =====================
+   Left Panel
+===================== */
 .left {
   width: 55%;
   padding: 60px;
-  background: linear-gradient(to right, rgba(0,0,0,0.8), rgba(0,0,0,0.4));
+  background: linear-gradient(
+    to right,
+    rgba(0, 0, 0, 0.85),
+    rgba(0, 0, 0, 0.45)
+  );
   color: white;
   position: relative;
+  box-sizing: border-box;
 }
 
+/* Vertical Tag */
 .vertical {
   position: absolute;
-  left: -40px;
+  left: -42px;
   top: 0;
   background: var(--accent);
-  color: black;
+  color: #000;
   writing-mode: vertical-rl;
-  font-weight: bold;
-  padding: 10px;
+  font-weight: 700;
+  letter-spacing: 1px;
+  padding: 12px 10px;
+}
+
+/* Headings */
+h1 {
+  margin-top: 40px;
+  font-size: 56px;
+  line-height: 1.1;
 }
 
 h1 strong {
   color: var(--accent);
+  font-weight: 700;
 }
 
+/* Synopsis */
+p {
+  margin-top: 20px;
+  font-size: 16px;
+  line-height: 1.6;
+  opacity: 0.95;
+}
+
+/* Button */
+button {
+  margin-top: 25px;
+  padding: 12px 22px;
+  background: var(--accent);
+  color: #000;
+  border: none;
+  font-weight: 700;
+  font-size: 14px;
+  cursor: default; /* no hover needed for poster */
+}
+
+/* =====================
+   Right Panel
+===================== */
 .right {
   width: 45%;
   display: flex;
   align-items: center;
   justify-content: center;
+  box-sizing: border-box;
 }
 
+/* Character Image */
 .right img {
   max-height: 90%;
+  max-width: 90%;
   background: white;
   padding: 10px;
+  border-radius: 6px;
 }
