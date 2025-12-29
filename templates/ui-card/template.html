@@ -1,39 +1,67 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Poster Generator</title>
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <h2>Generate Anime Card</h2>
 
-  <form action="/generate" method="post" enctype="multipart/form-data">
+<div class="root">
 
-    <input name="title" placeholder="Title" required><br><br>
-    <input name="subtitle" placeholder="Subtitle / Season" required><br><br>
+  <div class="top-nav" id="nav"></div>
 
-    <input name="badge" placeholder="Badge (ONGOING / UPCOMING)"><br><br>
+  <div class="glass main">
+    <div class="badge" id="badge"></div>
 
-    <input name="nav" placeholder="Top Nav (HOME,ANIME,CHARACTERS,GALLERY)"><br><br>
+    <h1 id="title"></h1>
+    <h2 id="subtitle"></h2>
 
-    <textarea name="synopsis" placeholder="Synopsis" required></textarea><br><br>
+    <div class="meta">
+      <div><b>Studio</b><span id="studio"></span></div>
+      <div><b>Status</b><span id="status"></span></div>
+      <div><b>Arc</b><span id="arc"></span></div>
+      <div><b>Schedule</b><span id="schedule"></span></div>
+    </div>
 
-    <input name="genres" placeholder="Genres (Action,Fantasy,Romance)"><br><br>
+    <p id="synopsis"></p>
 
-    <input name="studio" placeholder="Studio (Project No.9)"><br><br>
-    <input name="status" placeholder="Status (Ongoing)"><br><br>
-    <input name="arc" placeholder="Arc / Season (Winter 2026)"><br><br>
-    <input name="rating" placeholder="Rating (6.7/10)"><br><br>
-    <input name="schedule" placeholder="Schedule (Saturday)"><br><br>
+    <div class="genres" id="genres"></div>
 
-    <input name="accentColor" placeholder="#6fffd6" required><br><br>
+    <div class="rating" id="rating"></div>
+  </div>
 
-    <label>Background Image</label><br>
-    <input type="file" name="backgroundImage" accept="image/*" required><br><br>
+  <div class="preview">
+    <img id="character">
+  </div>
 
-    <label>Preview / Character Image</label><br>
-    <input type="file" name="characterImage" accept="image/*" required><br><br>
+</div>
 
-    <button type="submit">Generate</button>
-  </form>
+<script>
+fetch("/data/poster.json")
+.then(r => r.json())
+.then(d => {
+  document.body.style.backgroundImage = `url(${d.backgroundImage})`;
+  document.documentElement.style.setProperty("--accent", d.accentColor);
+
+  title.innerText = d.title;
+  subtitle.innerText = d.subtitle;
+  synopsis.innerText = d.synopsis;
+  character.src = d.characterImage;
+
+  badge.innerText = d.badge || "";
+
+  studio.innerText = d.studio;
+  status.innerText = d.status;
+  arc.innerText = d.arc;
+  schedule.innerText = d.schedule;
+  rating.innerText = d.rating;
+
+  if (d.nav)
+    nav.innerHTML = d.nav.split(",").map(i => `<span>${i.trim()}</span>`).join("");
+
+  if (d.genres)
+    genres.innerHTML = d.genres.split(",").map(g => `<span>${g.trim()}</span>`).join("");
+});
+</script>
+
 </body>
 </html>
