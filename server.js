@@ -26,8 +26,7 @@ const storage = multer.diskStorage({
     }
   },
   filename: (req, file, cb) => {
-    const ext = path.extname(file.originalname);
-    cb(null, Date.now() + ext);
+    cb(null, Date.now() + path.extname(file.originalname));
   }
 });
 
@@ -40,32 +39,27 @@ app.post(
     { name: "characterImage", maxCount: 1 }
   ]),
   async (req, res) => {
-    try {
-      const body = req.body;
+    const body = req.body;
 
-      const posterData = {
-        title: body.title,
-        subtitle: body.subtitle,
-        tag: body.tag,
-        synopsis: body.synopsis,
-        accentColor: body.accentColor,
-        backgroundImage: `/assets/backgrounds/${req.files.backgroundImage[0].filename}`,
-        characterImage: `/assets/characters/${req.files.characterImage[0].filename}`
-      };
+    const posterData = {
+      title: body.title,
+      subtitle: body.subtitle,
+      badge: body.badge,
+      nav: body.nav,
+      synopsis: body.synopsis,
+      genres: body.genres,
+      accentColor: body.accentColor,
+      backgroundImage: `/assets/backgrounds/${req.files.backgroundImage[0].filename}`,
+      characterImage: `/assets/characters/${req.files.characterImage[0].filename}`
+    };
 
-      if (!fs.existsSync("data")) {
-        fs.mkdirSync("data");
-      }
+    if (!fs.existsSync("data")) fs.mkdirSync("data");
 
-      fs.writeFileSync("data/poster.json", JSON.stringify(posterData, null, 2));
+    fs.writeFileSync("data/poster.json", JSON.stringify(posterData, null, 2));
 
-      await generatePoster();
+    await generatePoster();
 
-      res.redirect("/output/poster.png");
-    } catch (err) {
-      console.error(err);
-      res.status(500).send("Poster generation failed");
-    }
+    res.redirect("/output/poster.png");
   }
 );
 
