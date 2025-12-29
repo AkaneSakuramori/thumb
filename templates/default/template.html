@@ -23,17 +23,16 @@
   </div>
 
   <script>
-    fetch("../../data/poster.json")
-      .then(r => r.json())
-      .then(d => {
-        document.getElementById("title").innerText = d.title;
-        document.getElementById("subtitle").innerText = d.subtitle;
-        document.getElementById("synopsis").innerText = d.synopsis;
-        document.getElementById("tag").innerText = d.tag;
-        document.getElementById("character").src = d.characterImage;
-        document.documentElement.style.setProperty("--accent", d.accentColor);
-        document.body.style.backgroundImage = `url(${d.backgroundImage})`;
-      });
+  fetch("/data/poster.json")
+    .then(r => r.json())
+    .then(d => {
+      document.getElementById("title").innerText = d.title;
+      document.getElementById("subtitle").innerText = d.subtitle;
+      document.getElementById("synopsis").innerText = d.synopsis;
+      document.getElementById("tag").innerText = d.tag;
+
+      document.getElementById("character").src = d.characterImage;
+      document.documentElement.style.setProperty("--accent", d.accentColor);
+      document.body.style.backgroundImage = `url(${d.backgroundImage})`;
+    });
   </script>
-</body>
-</html>
