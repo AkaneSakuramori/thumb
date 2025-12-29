@@ -11,6 +11,7 @@ app.use(express.urlencoded({ extended: true }));
 app.use(express.static("public"));
 app.use("/assets", express.static("assets"));
 app.use("/output", express.static("output"));
+app.use("/fonts", express.static("fonts"));
 
 app.post("/generate", async (req, res) => {
   const data = req.body;
