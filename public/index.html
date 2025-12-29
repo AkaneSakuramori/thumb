@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Poster Generator</title>
+</head>
+<body>
+  <h2>Generate Poster</h2>
+
+  <form action="/generate" method="post">
+    <input name="title" placeholder="Title"><br><br>
+    <input name="subtitle" placeholder="Subtitle"><br><br>
+    <input name="tag" placeholder="Vertical Tag"><br><br>
+    <textarea name="synopsis" placeholder="Synopsis"></textarea><br><br>
+    <input name="accentColor" placeholder="#F4A7B9"><br><br>
+
+    <input name="backgroundImage" value="/assets/backgrounds/lil-miss-bg.jpg"><br><br>
+    <input name="characterImage" value="/assets/characters/lil-miss.png"><br><br>
+
+    <button type="submit">Generate</button>
+  </form>
+</body>
+</html>
