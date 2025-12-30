@@ -5,63 +5,89 @@
 </head>
 <body>
 
-<div class="root">
-
   <div class="top-nav" id="nav"></div>
 
-  <div class="glass main">
-    <div class="badge" id="badge"></div>
+  <div class="root">
 
-    <h1 id="title"></h1>
-    <h2 id="subtitle"></h2>
+    <div class="content-wrap">
 
-    <div class="meta">
-      <div><b>Studio</b><span id="studio"></span></div>
-      <div><b>Status</b><span id="status"></span></div>
-      <div><b>Arc</b><span id="arc"></span></div>
-      <div><b>Schedule</b><span id="schedule"></span></div>
+      <div class="glass main">
+
+        <div id="badge" class="badge"></div>
+
+        <h1 id="title"></h1>
+        <h2 id="subtitle"></h2>
+
+        <div class="meta">
+          <div>
+            <small>Studio</small>
+            <span id="studio"></span>
+          </div>
+          <div>
+            <small>Status</small>
+            <span id="status"></span>
+          </div>
+          <div>
+            <small>Arc</small>
+            <span id="arc"></span>
+          </div>
+          <div>
+            <small>Schedule</small>
+            <span id="schedule"></span>
+          </div>
+        </div>
+
+        <p id="synopsis"></p>
+
+        <div class="genres" id="genres"></div>
+
+        <div class="rating">
+          <span id="rating"></span>
+        </div>
+
+      </div>
+
+      <div class="preview">
+        <img id="character">
+      </div>
+
     </div>
 
-    <p id="synopsis"></p>
-
-    <div class="genres" id="genres"></div>
-
-    <div class="rating" id="rating"></div>
   </div>
 
-  <div class="preview">
-    <img id="character">
-  </div>
+  <script>
+    fetch("/data/poster.json")
+      .then(r => r.json())
+      .then(d => {
+        document.body.style.backgroundImage = `url(${d.backgroundImage})`;
+        document.documentElement.style.setProperty("--accent", d.accentColor);
 
-</div>
+        title.innerText = d.title;
+        subtitle.innerText = d.subtitle;
+        synopsis.innerText = d.synopsis;
+        character.src = d.characterImage;
 
-<script>
-fetch("/data/poster.json")
-.then(r => r.json())
-.then(d => {
-  document.body.style.backgroundImage = `url(${d.backgroundImage})`;
-  document.documentElement.style.setProperty("--accent", d.accentColor);
+        badge.innerText = d.badge || "";
 
-  title.innerText = d.title;
-  subtitle.innerText = d.subtitle;
-  synopsis.innerText = d.synopsis;
-  character.src = d.characterImage;
+        studio.innerText = d.studio || "";
+        status.innerText = d.status || "";
+        arc.innerText = d.arc || "";
+        schedule.innerText = d.schedule || "";
+        rating.innerText = d.rating || "";
 
-  badge.innerText = d.badge || "";
+        if (d.nav) {
+          nav.innerHTML = d.nav.split(",")
+            .map(i => `<span>${i.trim()}</span>`)
+            .join("");
+        }
 
-  studio.innerText = d.studio;
-  status.innerText = d.status;
-  arc.innerText = d.arc;
-  schedule.innerText = d.schedule;
-  rating.innerText = d.rating;
-
-  if (d.nav)
-    nav.innerHTML = d.nav.split(",").map(i => `<span>${i.trim()}</span>`).join("");
-
-  if (d.genres)
-    genres.innerHTML = d.genres.split(",").map(g => `<span>${g.trim()}</span>`).join("");
-});
-</script>
+        if (d.genres) {
+          genres.innerHTML = d.genres.split(",")
+            .map(g => `<span>${g.trim()}</span>`)
+            .join("");
+        }
+      });
+  </script>
 
 </body>
 </html>
