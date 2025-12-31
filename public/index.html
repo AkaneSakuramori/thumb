@@ -2,6 +2,7 @@
 <html>
 <head>
   <title>Anime Card Generator</title>
+
   <style>
     body {
       font-family: Arial, sans-serif;
@@ -53,16 +54,32 @@
       border-radius: 12px;
       cursor: pointer;
       font-size: 15px;
+      margin-top: 10px;
+    }
+
+    .color-row {
+      display: flex;
+      gap: 12px;
+      align-items: center;
+    }
+
+    .color-row input[type="color"] {
+      width: 60px;
+      height: 44px;
+      padding: 0;
+      border-radius: 10px;
+      cursor: pointer;
     }
   </style>
 </head>
+
 <body>
 
   <h2>Generate Anime UI Card</h2>
 
   <form action="/generate" method="post" enctype="multipart/form-data">
 
-    <input name="brand" placeholder="Brand Name (e.g. YOUR SITE NAME)" required>
+    <input name="brand" placeholder="Brand Name (YOUR SITE NAME)" required>
 
     <input name="title" placeholder="Anime Title" required>
 
@@ -78,7 +95,18 @@
 
     <input name="genres" placeholder="Genres (Action, Adventure, Fantasy)">
 
-    <input name="accentColor" placeholder="Accent Color (#6fffd6)" value="#6fffd6" required>
+    <!-- COLOR PICKER -->
+    <label>Accent Color</label>
+    <div class="color-row">
+      <input type="color" id="colorPicker" value="#6fffd6">
+      <input
+        name="accentColor"
+        id="accentColor"
+        placeholder="#6fffd6"
+        value="#6fffd6"
+        required
+      >
+    </div>
 
     <label>Background Image</label>
     <input type="file" name="backgroundImage" accept="image/*" required>
@@ -89,6 +117,22 @@
     <button type="submit">Generate Image</button>
 
   </form>
+
+  <!-- COLOR SYNC SCRIPT -->
+  <script>
+    const picker = document.getElementById("colorPicker");
+    const input = document.getElementById("accentColor");
+
+    picker.addEventListener("input", () => {
+      input.value = picker.value;
+    });
+
+    input.addEventListener("input", () => {
+      if (input.value.startsWith("#")) {
+        picker.value = input.value;
+      }
+    });
+  </script>
 
 </body>
 </html>
