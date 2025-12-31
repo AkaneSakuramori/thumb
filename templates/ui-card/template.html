@@ -13,14 +13,6 @@
   <div class="bg-blur"></div>
   <div class="bg-vignette"></div>
 
-  <!-- SIDEBAR -->
-  <div class="sidebar">
-    <div class="nav active">HOME</div>
-    <div class="nav">SEARCH</div>
-    <div class="nav">CATEGORY</div>
-    <div class="nav">FAVORITES</div>
-  </div>
-
   <!-- BRAND -->
   <div class="brand">
     <span class="menu">☰</span>
@@ -52,8 +44,6 @@
         </div>
       </div>
 
-      <p id="synopsis"></p>
-
     </div>
 
     <!-- CHARACTER -->
@@ -63,10 +53,10 @@
 
   </div>
 
-  <!-- RIGHT SYNOPSIS -->
+  <!-- RIGHT SYNOPSIS (ONLY ONE) -->
   <div class="glass synopsis">
     <h3>SYNOPSIS</h3>
-    <p id="synopsisRight"></p>
+    <p id="synopsis"></p>
   </div>
 
 </div>
@@ -86,7 +76,6 @@ fetch("/data/poster.json")
   studio.innerText = d.studio || "";
   arc.innerText = d.arc || "";
   synopsis.innerText = d.synopsis || "";
-  synopsisRight.innerText = d.synopsis || "";
   badge.innerText = d.badge || "";
 
   character.src = d.characterImage;
