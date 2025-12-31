@@ -1,138 +1,197 @@
-<!DOCTYPE html>
-<html>
-<head>
-  <title>Anime Card Generator</title>
+:root {
+  --accent: #6fffd6;
+}
 
-  <style>
-    body {
-      font-family: Arial, sans-serif;
-      background: #0f1117;
-      color: white;
-      padding: 40px;
-    }
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
 
-    h2 {
-      margin-bottom: 20px;
-    }
+body {
+  width: 1280px;
+  height: 720px;
+  font-family: Arial, sans-serif;
+  color: white;
+  overflow: hidden;
+}
 
-    form {
-      max-width: 520px;
-      background: #161a24;
-      padding: 24px;
-      border-radius: 16px;
-    }
+.root {
+  position: relative;
+  width: 100%;
+  height: 100%;
+}
 
-    input, textarea {
-      width: 100%;
-      padding: 12px;
-      margin-bottom: 14px;
-      border-radius: 10px;
-      border: none;
-      outline: none;
-      font-size: 14px;
-    }
+/* BACKGROUND */
+.bg {
+  position: absolute;
+  inset: 0;
+  background-size: cover;
+  background-position: center;
+  z-index: 0;
+}
 
-    textarea {
-      min-height: 100px;
-      resize: vertical;
-    }
+.bg-blur {
+  position: absolute;
+  inset: 0;
+  backdrop-filter: blur(22px);
+  background: rgba(0,0,0,0.35);
+  z-index: 1;
+}
 
-    label {
-      font-size: 13px;
-      opacity: 0.8;
-      margin-bottom: 6px;
-      display: block;
-    }
+.bg-vignette {
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(
+    circle at center,
+    transparent 45%,
+    rgba(0,0,0,0.8) 100%
+  );
+  z-index: 2;
+}
 
-    button {
-      width: 100%;
-      padding: 14px;
-      background: #6fffd6;
-      color: black;
-      font-weight: bold;
-      border: none;
-      border-radius: 12px;
-      cursor: pointer;
-      font-size: 15px;
-      margin-top: 10px;
-    }
+/* =========================
+   CENTER COLUMN SYSTEM
+========================= */
 
-    .color-row {
-      display: flex;
-      gap: 12px;
-      align-items: center;
-    }
+.center {
+  position: absolute;
+  top: 26px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 1100px; /* balanced canvas */
+  z-index: 5;
+}
 
-    .color-row input[type="color"] {
-      width: 60px;
-      height: 44px;
-      padding: 0;
-      border-radius: 10px;
-      cursor: pointer;
-    }
-  </style>
-</head>
+/* BRAND */
+.brand {
+  display: flex;
+  gap: 12px;
+  padding: 14px 28px;
+  background: rgba(30,41,59,0.7);
+  border-radius: 40px;
+  backdrop-filter: blur(16px);
+  width: fit-content;
+}
 
-<body>
+.menu {
+  opacity: 0.8;
+}
 
-  <h2>Generate Anime UI Card</h2>
+/* GENRES */
+.genres {
+  margin-top: 22px;
+  display: flex;
+  gap: 14px;
+}
 
-  <form action="/generate" method="post" enctype="multipart/form-data">
+.genres span {
+  background: white;
+  color: #111;
+  padding: 8px 18px;
+  border-radius: 22px;
+  font-size: 12px;
+  font-weight: bold;
+}
 
-    <input name="brand" placeholder="Brand Name (YOUR SITE NAME)" required>
+/* MAIN CONTENT */
+.main {
+  margin-top: 28px; /* aligned with genres */
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 80px;
+}
 
-    <input name="title" placeholder="Anime Title" required>
+/* GLASS */
+.glass {
+  background: linear-gradient(
+    to bottom,
+    rgba(15,23,42,0.88),
+    rgba(15,23,42,0.58)
+  );
+  backdrop-filter: blur(22px);
+  border-radius: 30px;
+}
 
-    <input name="subtitle" placeholder="Subtitle (Season / Part)" required>
+/* INFO CARD */
+.info {
+  width: 620px;
+  padding: 40px;
+}
 
-    <input name="badge" placeholder="Badge (ONGOING / UPCOMING)">
+/* BADGE */
+.badge {
+  display: inline-block;
+  background: var(--accent);
+  color: black;
+  padding: 6px 16px;
+  border-radius: 20px;
+  font-size: 12px;
+  font-weight: bold;
+  margin-bottom: 10px;
+}
 
-    <input name="studio" placeholder="Studio">
+/* TITLES */
+h1 {
+  font-size: 40px;
+  line-height: 1.15;
+}
 
-    <input name="arc" placeholder="Arc / Season (Winter 2026)">
+h2 {
+  font-size: 17px;
+  opacity: 0.75;
+  margin-bottom: 22px;
+}
 
-    <textarea name="synopsis" placeholder="Synopsis" required></textarea>
+/* META */
+.meta {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 14px;
+  margin-bottom: 18px;
+}
 
-    <input name="genres" placeholder="Genres (Action, Adventure, Fantasy)">
+.meta-dark {
+  background: linear-gradient(to right, #0b0f1a, #11162a);
+  padding: 16px;
+  border-radius: 16px;
+}
 
-    <!-- COLOR PICKER -->
-    <label>Accent Color</label>
-    <div class="color-row">
-      <input type="color" id="colorPicker" value="#6fffd6">
-      <input
-        name="accentColor"
-        id="accentColor"
-        placeholder="#6fffd6"
-        value="#6fffd6"
-        required
-      >
-    </div>
+.meta-light {
+  background: rgba(255,255,255,0.1);
+  padding: 16px;
+  border-radius: 16px;
+}
 
-    <label>Background Image</label>
-    <input type="file" name="backgroundImage" accept="image/*" required>
+.meta small {
+  font-size: 11px;
+  opacity: 0.6;
+}
 
-    <label>Character / Preview Image</label>
-    <input type="file" name="characterImage" accept="image/*" required>
+.meta span {
+  display: block;
+  font-weight: bold;
+  margin-top: 4px;
+}
 
-    <button type="submit">Generate Image</button>
+/* SYNOPSIS TEXT */
+.synopsis-text {
+  font-size: 14px;
+  line-height: 1.65;
+  opacity: 0.9;
+}
 
-  </form>
+/* CHARACTER */
+.character {
+  width: 320px;
+  flex-shrink: 0;
+}
 
-  <!-- COLOR SYNC SCRIPT -->
-  <script>
-    const picker = document.getElementById("colorPicker");
-    const input = document.getElementById("accentColor");
-
-    picker.addEventListener("input", () => {
-      input.value = picker.value;
-    });
-
-    input.addEventListener("input", () => {
-      if (input.value.startsWith("#")) {
-        picker.value = input.value;
-      }
-    });
-  </script>
-
-</body>
-</html>
+.character img {
+  width: 100%;
+  height: 480px;
+  object-fit: cover;
+  border-radius: 30px;
+  box-shadow: 0 40px 80px rgba(0,0,0,0.6);
+}
