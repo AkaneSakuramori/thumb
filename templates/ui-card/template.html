@@ -5,89 +5,98 @@
 </head>
 <body>
 
-  <div class="top-nav" id="nav"></div>
+<div class="root">
 
-  <div class="root">
+  <!-- LEFT SIDEBAR -->
+  <div class="sidebar">
+    <div class="icon active">⌂<span>HOME</span></div>
+    <div class="icon">🔍<span>SEARCH</span></div>
+    <div class="icon">▦<span>CATEGORY</span></div>
+    <div class="icon">★<span>FAVORITES</span></div>
+  </div>
 
-    <div class="content-wrap">
+  <!-- TOP BRAND -->
+  <div class="brand">
+    <span class="menu">☰</span>
+    <strong>ANIME</strong>&nbsp;UNITY
+  </div>
 
-      <div class="glass main">
+  <!-- GENRES -->
+  <div class="genres-top" id="genres"></div>
 
-        <div id="badge" class="badge"></div>
+  <!-- MAIN INFO GLASS -->
+  <div class="glass info">
 
-        <h1 id="title"></h1>
-        <h2 id="subtitle"></h2>
+    <div class="badge" id="badge"></div>
 
-        <div class="meta">
-          <div>
-            <small>Studio</small>
-            <span id="studio"></span>
-          </div>
-          <div>
-            <small>Status</small>
-            <span id="status"></span>
-          </div>
-          <div>
-            <small>Arc</small>
-            <span id="arc"></span>
-          </div>
-          <div>
-            <small>Schedule</small>
-            <span id="schedule"></span>
-          </div>
-        </div>
+    <h1 id="title"></h1>
+    <h2 id="subtitle"></h2>
 
-        <p id="synopsis"></p>
-
-        <div class="genres" id="genres"></div>
-
-        <div class="rating">
-          <span id="rating"></span>
-        </div>
-
+    <div class="meta">
+      <div class="dark">
+        <small>Studio</small>
+        <span id="studio"></span>
       </div>
-
-      <div class="preview">
-        <img id="character">
+      <div>
+        <small>Status</small>
+        <span id="status"></span>
       </div>
+      <div>
+        <small>Arc</small>
+        <span id="arc"></span>
+      </div>
+      <div>
+        <small>Schedule</small>
+        <span id="schedule"></span>
+      </div>
+    </div>
 
+    <p id="synopsis"></p>
+
+    <div class="rating">
+      <span id="rating"></span>
     </div>
 
   </div>
 
-  <script>
-    fetch("/data/poster.json")
-      .then(r => r.json())
-      .then(d => {
-        document.body.style.backgroundImage = `url(${d.backgroundImage})`;
-        document.documentElement.style.setProperty("--accent", d.accentColor);
+  <!-- SYNOPSIS SIDE CARD -->
+  <div class="glass synopsis-box">
+    <h3>SYNOPSIS</h3>
+    <p id="synopsisRight"></p>
+  </div>
 
-        title.innerText = d.title;
-        subtitle.innerText = d.subtitle;
-        synopsis.innerText = d.synopsis;
-        character.src = d.characterImage;
+  <!-- CHARACTER IMAGE -->
+  <div class="character">
+    <img id="character">
+  </div>
 
-        badge.innerText = d.badge || "";
+</div>
 
-        studio.innerText = d.studio || "";
-        status.innerText = d.status || "";
-        arc.innerText = d.arc || "";
-        schedule.innerText = d.schedule || "";
-        rating.innerText = d.rating || "";
+<script>
+fetch("/data/poster.json")
+.then(r => r.json())
+.then(d => {
+  document.body.style.backgroundImage = `url(${d.backgroundImage})`;
+  document.documentElement.style.setProperty("--accent", d.accentColor);
 
-        if (d.nav) {
-          nav.innerHTML = d.nav.split(",")
-            .map(i => `<span>${i.trim()}</span>`)
-            .join("");
-        }
+  title.innerText = d.title;
+  subtitle.innerText = d.subtitle;
+  synopsis.innerText = d.synopsis;
+  synopsisRight.innerText = d.synopsis;
+  badge.innerText = d.badge;
 
-        if (d.genres) {
-          genres.innerHTML = d.genres.split(",")
-            .map(g => `<span>${g.trim()}</span>`)
-            .join("");
-        }
-      });
-  </script>
+  studio.innerText = d.studio;
+  status.innerText = d.status;
+  arc.innerText = d.arc;
+  schedule.innerText = d.schedule;
+  rating.innerText = d.rating;
+
+  character.src = d.characterImage;
+
+  genres.innerHTML = d.genres.split(",")
+    .map(g => `<span>${g.trim()}</span>`).join("");
+});
+</script>
 
 </body>
 </html>
