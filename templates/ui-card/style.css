@@ -53,7 +53,7 @@ body {
 /* BRAND */
 .brand {
   position: absolute;
-  top: 28px;
+  top: 26px;
   left: 60px;
   display: flex;
   gap: 12px;
@@ -67,7 +67,7 @@ body {
 /* GENRES */
 .genres {
   position: absolute;
-  top: 96px;
+  top: 92px;
   left: 80px;
   display: flex;
   gap: 14px;
@@ -87,10 +87,10 @@ body {
 .main {
   position: absolute;
   left: 80px;
-  top: 145px; /* closer to genres */
+  top: 130px; /* MOVED UP */
   display: flex;
   align-items: center;
-  gap: 60px; /* more distance from character */
+  gap: 70px; /* character slightly farther */
   z-index: 5;
 }
 
@@ -98,8 +98,8 @@ body {
 .glass {
   background: linear-gradient(
     to bottom,
-    rgba(15,23,42,0.85),
-    rgba(15,23,42,0.55)
+    rgba(15,23,42,0.88),
+    rgba(15,23,42,0.58)
   );
   backdrop-filter: blur(22px);
   border-radius: 30px;
@@ -107,7 +107,7 @@ body {
 
 /* INFO CARD */
 .info {
-  width: 580px;
+  width: 600px;
   padding: 38px;
 }
 
@@ -140,6 +140,7 @@ h2 {
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 14px;
+  margin-bottom: 18px;
 }
 
 .meta-dark {
@@ -165,6 +166,14 @@ h2 {
   margin-top: 4px;
 }
 
+/* SYNOPSIS TEXT */
+.synopsis-text {
+  font-size: 14px;
+  line-height: 1.65;
+  opacity: 0.9;
+  margin-top: 14px;
+}
+
 /* CHARACTER */
 .character {
   width: 320px;
@@ -176,27 +185,4 @@ h2 {
   object-fit: cover;
   border-radius: 30px;
   box-shadow: 0 40px 80px rgba(0,0,0,0.6);
-}
-
-/* RIGHT SYNOPSIS */
-.synopsis {
-  position: absolute;
-  right: 60px;
-  top: 165px;
-  width: 340px;
-  padding: 28px;
-  z-index: 5;
-}
-
-.synopsis h3 {
-  font-size: 14px;
-  letter-spacing: 1px;
-  color: var(--accent);
-  margin-bottom: 12px;
-}
-
-.synopsis p {
-  font-size: 14px;
-  line-height: 1.65;
-  opacity: 0.9;
 }
