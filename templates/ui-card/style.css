@@ -1,3 +1,4 @@
+
 :root {
   --accent: #6fffd6;
 }
@@ -11,15 +12,9 @@
 body {
   width: 1280px;
   height: 720px;
-  font-family: Arial, sans-serif;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
   color: white;
   overflow: hidden;
-}
-
-.root {
-  position: relative;
-  width: 100%;
-  height: 100%;
 }
 
 /* BACKGROUND */
@@ -28,120 +23,116 @@ body {
   inset: 0;
   background-size: cover;
   background-position: center;
-  z-index: 0;
+  z-index: 1;
 }
 
 .bg-blur {
   position: absolute;
   inset: 0;
-  backdrop-filter: blur(22px);
-  background: rgba(0,0,0,0.35);
-  z-index: 1;
-}
-
-.bg-vignette {
-  position: absolute;
-  inset: 0;
-  background: radial-gradient(
-    circle at center,
-    transparent 45%,
-    rgba(0,0,0,0.8) 100%
-  );
+  background: rgba(0,0,0,0.25);
+  backdrop-filter: blur(5px);
   z-index: 2;
 }
 
-/* =========================
-   CENTER COLUMN SYSTEM
-========================= */
-
-.center {
-  position: absolute;
-  top: 26px;
-  left: 50%;
-  transform: translateX(-50%);
-  width: 1100px; /* balanced canvas */
-  z-index: 5;
+.root {
+  position: relative;
+  width: 100%;
+  height: 100%;
 }
 
 /* BRAND */
-.brand {
+.brand-pill {
+  position: absolute;
+  top: 28px;
+  left: 28px;
   display: flex;
-  gap: 12px;
-  padding: 14px 28px;
-  background: rgba(30,41,59,0.7);
-  border-radius: 40px;
-  backdrop-filter: blur(16px);
-  width: fit-content;
+  align-items: center;
+  gap: 14px;
+  padding: 14px 26px;
+  border-radius: 999px;
+  background: rgba(30,41,59,0.8);
+  backdrop-filter: blur(14px);
+  z-index: 20;
+  box-shadow: 0 8px 30px rgba(0,0,0,0.35);
 }
 
-.menu {
-  opacity: 0.8;
+.menu-icon {
+  font-size: 22px;
+}
+
+.brand-text {
+  font-size: 18px;
+  font-weight: 700;
+  letter-spacing: 1.6px;
+  color: var(--accent);
 }
 
 /* GENRES */
 .genres {
-  margin-top: 22px;
+  position: absolute;
+  top: 120px;
+  left: 32px;
   display: flex;
   gap: 14px;
+  z-index: 20;
 }
 
 .genres span {
   background: white;
-  color: #111;
-  padding: 8px 18px;
-  border-radius: 22px;
-  font-size: 12px;
-  font-weight: bold;
+  color: #0f172a;
+  padding: 8px 20px;
+  border-radius: 999px;
+  font-size: 13px;
+  font-weight: 700;
 }
 
-/* MAIN CONTENT */
+/* MAIN */
 .main {
-  margin-top: 28px; /* aligned with genres */
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
   display: flex;
-  align-items: center;
-  justify-content: space-between;
   gap: 80px;
+  align-items: center;
+  z-index: 10;
 }
 
-/* GLASS */
+/* GLASS INFO */
 .glass {
   background: linear-gradient(
-    to bottom,
-    rgba(15,23,42,0.88),
-    rgba(15,23,42,0.58)
+    135deg,
+    rgba(15,23,42,0.9),
+    rgba(30,41,59,0.75)
   );
-  backdrop-filter: blur(22px);
-  border-radius: 30px;
-}
-
-/* INFO CARD */
-.info {
-  width: 620px;
+  backdrop-filter: blur(18px);
+  border-radius: 28px;
   padding: 40px;
+  width: 520px;
+  box-shadow: 0 25px 60px rgba(0,0,0,0.45);
 }
 
-/* BADGE */
 .badge {
   display: inline-block;
   background: var(--accent);
   color: black;
-  padding: 6px 16px;
-  border-radius: 20px;
+  padding: 6px 18px;
+  border-radius: 999px;
   font-size: 12px;
-  font-weight: bold;
-  margin-bottom: 10px;
+  font-weight: 800;
+  margin-bottom: 18px;
 }
 
-/* TITLES */
 h1 {
-  font-size: 40px;
-  line-height: 1.15;
+  font-size: 36px;
+  line-height: 1.2;
+  margin-bottom: 6px;
 }
 
 h2 {
-  font-size: 17px;
-  opacity: 0.75;
-  margin-bottom: 22px;
+  font-size: 16px;
+  opacity: 0.7;
+  margin-bottom: 24px;
 }
 
 /* META */
@@ -149,17 +140,17 @@ h2 {
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 14px;
-  margin-bottom: 18px;
+  margin-bottom: 22px;
 }
 
 .meta-dark {
-  background: linear-gradient(to right, #0b0f1a, #11162a);
+  background: #020617;
   padding: 16px;
   border-radius: 16px;
 }
 
 .meta-light {
-  background: rgba(255,255,255,0.1);
+  background: rgba(255,255,255,0.08);
   padding: 16px;
   border-radius: 16px;
 }
@@ -171,27 +162,22 @@ h2 {
 
 .meta span {
   display: block;
-  font-weight: bold;
   margin-top: 4px;
+  font-weight: 700;
 }
 
-/* SYNOPSIS TEXT */
-.synopsis-text {
+/* SYNOPSIS */
+.synopsis {
   font-size: 14px;
-  line-height: 1.65;
-  opacity: 0.9;
+  line-height: 1.7;
+  opacity: 0.85;
 }
 
 /* CHARACTER */
-.character {
-  width: 320px;
-  flex-shrink: 0;
-}
-
 .character img {
-  width: 100%;
-  height: 480px;
+  width: 300px;
+  height: 440px;
   object-fit: cover;
-  border-radius: 30px;
-  box-shadow: 0 40px 80px rgba(0,0,0,0.6);
+  border-radius: 26px;
+  box-shadow: 0 30px 80px rgba(0,0,0,0.55);
 }
