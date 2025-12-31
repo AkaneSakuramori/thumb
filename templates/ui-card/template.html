@@ -76,34 +76,40 @@
 <!-- DATA LOADER -->
 <script>
 fetch("/data/poster.json")
-  .then(res => res.json())
-  .then(d => {
+.then(r => r.json())
+.then(d => {
+  document.documentElement.style.setProperty("--accent", d.accentColor || "#6fffd6");
 
-    document.documentElement.style.setProperty(
-      "--accent",
-      d.accentColor || "#6fffd6"
-    );
+  document.querySelector(".bg").style.backgroundImage =
+    `url(${d.backgroundImage})`;
 
-    document.querySelector(".bg").style.backgroundImage =
-      `url(${d.backgroundImage})`;
+  const brandEl = document.getElementById("brand");
+  const titleEl = document.getElementById("title");
+  const subtitleEl = document.getElementById("subtitle");
+  const studioEl = document.getElementById("studio");
+  const arcEl = document.getElementById("arc");
+  const synopsisEl = document.getElementById("synopsis");
+  const badgeEl = document.getElementById("badge");
+  const characterEl = document.getElementById("character");
+  const genresEl = document.getElementById("genres");
 
-    document.getElementById("brand").innerText = d.brand || "";
-    document.getElementById("title").innerText = d.title || "";
-    document.getElementById("subtitle").innerText = d.subtitle || "";
-    document.getElementById("studio").innerText = d.studio || "";
-    document.getElementById("arc").innerText = d.arc || "";
-    document.getElementById("synopsis").innerText = d.synopsis || "";
-    document.getElementById("badge").innerText = d.badge || "";
+  brandEl.innerText = d.brand || "";
+  titleEl.innerText = d.title || "";
+  subtitleEl.innerText = d.subtitle || "";
+  studioEl.innerText = d.studio || "";
+  arcEl.innerText = d.arc || "";
+  synopsisEl.innerText = d.synopsis || "";
+  badgeEl.innerText = d.badge || "";
 
-    document.getElementById("character").src = d.characterImage;
+  characterEl.src = d.characterImage;
 
-    if (d.genres) {
-      document.getElementById("genres").innerHTML =
-        d.genres.split(",")
-          .map(g => `<span>${g.trim()}</span>`)
-          .join("");
-    }
-  });
+  if (d.genres) {
+    genresEl.innerHTML = d.genres
+      .split(",")
+      .map(g => `<span>${g.trim()}</span>`)
+      .join("");
+  }
+});
 </script>
 
 </body>
