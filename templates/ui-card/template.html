@@ -7,67 +7,55 @@
 
 <div class="root">
 
-  <!-- LEFT SIDEBAR -->
-  <div class="sidebar">
-    <div class="icon active">⌂<span>HOME</span></div>
-    <div class="icon">🔍<span>SEARCH</span></div>
-    <div class="icon">▦<span>CATEGORY</span></div>
-    <div class="icon">★<span>FAVORITES</span></div>
-  </div>
+  <!-- BACKGROUND BLUR OVERLAY -->
+  <div class="bg-blur"></div>
 
-  <!-- TOP BRAND -->
+  <!-- BRAND -->
   <div class="brand">
     <span class="menu">☰</span>
-    <strong>ANIME</strong>&nbsp;UNITY
+    <span id="brandName"></span>
   </div>
 
   <!-- GENRES -->
   <div class="genres-top" id="genres"></div>
 
-  <!-- MAIN INFO GLASS -->
-  <div class="glass info">
+  <!-- MAIN CONTENT -->
+  <div class="content-wrap">
 
-    <div class="badge" id="badge"></div>
+    <!-- INFO CARD -->
+    <div class="glass info">
 
-    <h1 id="title"></h1>
-    <h2 id="subtitle"></h2>
+      <div class="badge" id="badge"></div>
 
-    <div class="meta">
-      <div class="dark">
-        <small>Studio</small>
-        <span id="studio"></span>
+      <h1 id="title"></h1>
+      <h2 id="subtitle"></h2>
+
+      <div class="meta">
+        <div class="dark">
+          <small>Studio</small>
+          <span id="studio"></span>
+        </div>
+        <div>
+          <small>Arc</small>
+          <span id="arc"></span>
+        </div>
       </div>
-      <div>
-        <small>Status</small>
-        <span id="status"></span>
-      </div>
-      <div>
-        <small>Arc</small>
-        <span id="arc"></span>
-      </div>
-      <div>
-        <small>Schedule</small>
-        <span id="schedule"></span>
-      </div>
+
+      <p id="synopsis"></p>
+
     </div>
 
-    <p id="synopsis"></p>
-
-    <div class="rating">
-      <span id="rating"></span>
+    <!-- CHARACTER CARD -->
+    <div class="character">
+      <img id="character">
     </div>
 
   </div>
 
-  <!-- SYNOPSIS SIDE CARD -->
+  <!-- RIGHT SYNOPSIS BOX -->
   <div class="glass synopsis-box">
     <h3>SYNOPSIS</h3>
     <p id="synopsisRight"></p>
-  </div>
-
-  <!-- CHARACTER IMAGE -->
-  <div class="character">
-    <img id="character">
   </div>
 
 </div>
@@ -79,22 +67,26 @@ fetch("/data/poster.json")
   document.body.style.backgroundImage = `url(${d.backgroundImage})`;
   document.documentElement.style.setProperty("--accent", d.accentColor);
 
+  brandName.innerText = d.brand || "YOUR BRAND";
+
   title.innerText = d.title;
   subtitle.innerText = d.subtitle;
   synopsis.innerText = d.synopsis;
   synopsisRight.innerText = d.synopsis;
-  badge.innerText = d.badge;
 
-  studio.innerText = d.studio;
-  status.innerText = d.status;
-  arc.innerText = d.arc;
-  schedule.innerText = d.schedule;
-  rating.innerText = d.rating;
+  badge.innerText = d.badge || "";
+
+  studio.innerText = d.studio || "";
+  arc.innerText = d.arc || "";
 
   character.src = d.characterImage;
 
-  genres.innerHTML = d.genres.split(",")
-    .map(g => `<span>${g.trim()}</span>`).join("");
+  if (d.genres) {
+    genres.innerHTML = d.genres
+      .split(",")
+      .map(g => `<span>${g.trim()}</span>`)
+      .join("");
+  }
 });
 </script>
 
