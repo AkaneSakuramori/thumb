@@ -2,18 +2,9 @@
 <html>
 <head>
   <meta charset="UTF-8">
-  <title>Anime Poster</title>
+  <title>Anime Card</title>
   <link rel="stylesheet" href="style.css">
-
-  <!-- Small override to keep blur VERY LIGHT -->
-  <style>
-    .bg-blur {
-      backdrop-filter: blur(2px); /* ~5% blur feel */
-      background: rgba(0,0,0,0.18);
-    }
-  </style>
 </head>
-
 <body>
 
 <div class="root">
@@ -21,91 +12,91 @@
   <!-- BACKGROUND -->
   <div class="bg"></div>
   <div class="bg-blur"></div>
-  <div class="bg-vignette"></div>
 
-  <!-- CENTER COLUMN -->
-  <div class="center">
+  <!-- BRAND PILL -->
+  <div class="brand-pill">
+    <span class="menu-icon">☰</span>
+    <span class="brand-text" id="brand"></span>
+  </div>
 
-    <!-- BRAND -->
-    <div class="brand">
-      <span class="menu">☰</span>
-      <span id="brand"></span>
+  <!-- GENRES -->
+  <div class="genres" id="genres"></div>
+
+  <!-- MAIN CENTER -->
+  <div class="main">
+
+    <!-- INFO BOX -->
+    <div class="glass info">
+
+      <div class="badge" id="badge"></div>
+
+      <h1 id="title"></h1>
+      <h2 id="subtitle"></h2>
+
+      <div class="meta">
+        <div class="meta-dark">
+          <small>Studio</small>
+          <span id="studio"></span>
+        </div>
+        <div class="meta-light">
+          <small>Arc</small>
+          <span id="arc"></span>
+        </div>
+      </div>
+
+      <p class="synopsis" id="synopsis"></p>
+
     </div>
 
-    <!-- GENRES -->
-    <div class="genres" id="genres"></div>
-
-    <!-- MAIN CONTENT -->
-    <div class="main">
-
-      <!-- INFO CARD -->
-      <div class="glass info">
-
-        <div class="badge" id="badge"></div>
-
-        <h1 id="title"></h1>
-        <h2 id="subtitle"></h2>
-
-        <div class="meta">
-          <div class="meta-dark">
-            <small>Studio</small>
-            <span id="studio"></span>
-          </div>
-
-          <div class="meta-light">
-            <small>Arc</small>
-            <span id="arc"></span>
-          </div>
-        </div>
-
-        <!-- SYNOPSIS INSIDE MAIN BOX -->
-        <p class="synopsis-text" id="synopsis"></p>
-
-      </div>
-
-      <!-- CHARACTER IMAGE -->
-      <div class="character">
-        <img id="character" alt="Character">
-      </div>
-
+    <!-- CHARACTER IMAGE -->
+    <div class="character">
+      <img id="character">
     </div>
 
   </div>
+
 </div>
 
-<!-- DATA LOADER -->
 <script>
 fetch("/data/poster.json")
-.then(r => r.json())
+.then(res => res.json())
 .then(d => {
-  document.documentElement.style.setProperty("--accent", d.accentColor || "#6fffd6");
+
+  document.documentElement.style.setProperty(
+    "--accent",
+    d.accentColor || "#6fffd6"
+  );
 
   document.querySelector(".bg").style.backgroundImage =
     `url(${d.backgroundImage})`;
 
-  const brandEl = document.getElementById("brand");
-  const titleEl = document.getElementById("title");
-  const subtitleEl = document.getElementById("subtitle");
-  const studioEl = document.getElementById("studio");
-  const arcEl = document.getElementById("arc");
-  const synopsisEl = document.getElementById("synopsis");
-  const badgeEl = document.getElementById("badge");
-  const characterEl = document.getElementById("character");
-  const genresEl = document.getElementById("genres");
+  document.getElementById("brand").innerText =
+    d.brand || "";
 
-  brandEl.innerText = d.brand || "";
-  titleEl.innerText = d.title || "";
-  subtitleEl.innerText = d.subtitle || "";
-  studioEl.innerText = d.studio || "";
-  arcEl.innerText = d.arc || "";
-  synopsisEl.innerText = d.synopsis || "";
-  badgeEl.innerText = d.badge || "";
+  document.getElementById("title").innerText =
+    d.title || "";
 
-  characterEl.src = d.characterImage;
+  document.getElementById("subtitle").innerText =
+    d.subtitle || "";
+
+  document.getElementById("badge").innerText =
+    d.badge || "";
+
+  document.getElementById("studio").innerText =
+    d.studio || "";
+
+  document.getElementById("arc").innerText =
+    d.arc || "";
+
+  document.getElementById("synopsis").innerText =
+    d.synopsis || "";
+
+  document.getElementById("character").src =
+    d.characterImage;
 
   if (d.genres) {
-    genresEl.innerHTML = d.genres
-      .split(",")
+    document.getElementById("genres").innerHTML =
+      d.genres.split(",")
       .map(g => `<span>${g.trim()}</span>`)
       .join("");
   }
