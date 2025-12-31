@@ -7,14 +7,18 @@
 <body>
 
 <div class="root">
+
+  <!-- BACKGROUND -->
+  <div class="bg"></div>
   <div class="bg-blur"></div>
+  <div class="bg-vignette"></div>
 
   <!-- SIDEBAR -->
   <div class="sidebar">
-    <div class="nav-item active">HOME</div>
-    <div class="nav-item">SEARCH</div>
-    <div class="nav-item">CATEGORY</div>
-    <div class="nav-item">FAVORITES</div>
+    <div class="nav active">HOME</div>
+    <div class="nav">SEARCH</div>
+    <div class="nav">CATEGORY</div>
+    <div class="nav">FAVORITES</div>
   </div>
 
   <!-- BRAND -->
@@ -24,55 +28,59 @@
   </div>
 
   <!-- GENRES -->
-  <div class="genres-top" id="genres"></div>
+  <div class="genres" id="genres"></div>
 
-  <!-- MAIN CONTENT -->
-  <div class="content-wrap">
+  <!-- MAIN -->
+  <div class="main">
 
     <!-- INFO CARD -->
     <div class="glass info">
+
       <div class="badge" id="badge"></div>
 
       <h1 id="title"></h1>
       <h2 id="subtitle"></h2>
 
       <div class="meta">
-        <div class="dark">
+        <div class="meta-dark">
           <small>Studio</small>
           <span id="studio"></span>
         </div>
-        <div class="light">
+        <div class="meta-light">
           <small>Arc</small>
           <span id="arc"></span>
         </div>
       </div>
 
       <p id="synopsis"></p>
+
     </div>
 
     <!-- CHARACTER -->
-    <div class="character-section">
+    <div class="character">
       <img id="character">
     </div>
 
   </div>
 
   <!-- RIGHT SYNOPSIS -->
-  <div class="glass synopsis-box">
+  <div class="glass synopsis">
     <h3>SYNOPSIS</h3>
     <p id="synopsisRight"></p>
   </div>
+
 </div>
 
 <script>
 fetch("/data/poster.json")
 .then(r => r.json())
 .then(d => {
-  document.body.style.backgroundImage = `url(${d.backgroundImage})`;
   document.documentElement.style.setProperty("--accent", d.accentColor || "#6fffd6");
 
-  brand.innerText = d.brand || "";
+  document.querySelector(".bg").style.backgroundImage =
+    `url(${d.backgroundImage})`;
 
+  brand.innerText = d.brand || "";
   title.innerText = d.title || "";
   subtitle.innerText = d.subtitle || "";
   studio.innerText = d.studio || "";
