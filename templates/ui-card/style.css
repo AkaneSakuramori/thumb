@@ -22,7 +22,7 @@ body {
   height: 100%;
 }
 
-/* BACKGROUND LAYERS */
+/* BACKGROUND */
 .bg {
   position: absolute;
   inset: 0;
@@ -44,41 +44,17 @@ body {
   inset: 0;
   background: radial-gradient(
     circle at center,
-    transparent 40%,
-    rgba(0,0,0,0.75) 100%
+    transparent 45%,
+    rgba(0,0,0,0.8) 100%
   );
   z-index: 2;
-}
-
-/* SIDEBAR */
-.sidebar {
-  position: absolute;
-  left: 0;
-  top: 0;
-  width: 90px;
-  height: 100%;
-  background: rgba(15,23,42,0.85);
-  padding-top: 180px;
-  z-index: 5;
-}
-
-.nav {
-  padding: 26px 0;
-  text-align: center;
-  font-size: 11px;
-  opacity: 0.5;
-}
-
-.nav.active {
-  opacity: 1;
-  color: var(--accent);
 }
 
 /* BRAND */
 .brand {
   position: absolute;
-  top: 30px;
-  left: 120px;
+  top: 28px;
+  left: 60px;
   display: flex;
   gap: 12px;
   padding: 14px 28px;
@@ -91,8 +67,8 @@ body {
 /* GENRES */
 .genres {
   position: absolute;
-  top: 110px;
-  left: 140px;
+  top: 96px;
+  left: 80px;
   display: flex;
   gap: 14px;
   z-index: 5;
@@ -110,11 +86,11 @@ body {
 /* MAIN CONTENT */
 .main {
   position: absolute;
-  left: 120px;
-  top: 170px;
+  left: 80px;
+  top: 145px; /* closer to genres */
   display: flex;
   align-items: center;
-  gap: 0;
+  gap: 60px; /* more distance from character */
   z-index: 5;
 }
 
@@ -131,10 +107,8 @@ body {
 
 /* INFO CARD */
 .info {
-  width: 600px;
+  width: 580px;
   padding: 38px;
-  position: relative;
-  z-index: 3;
 }
 
 /* BADGE */
@@ -166,7 +140,6 @@ h2 {
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 14px;
-  margin-bottom: 22px;
 }
 
 .meta-dark {
@@ -192,18 +165,9 @@ h2 {
   margin-top: 4px;
 }
 
-/* TEXT */
-p {
-  font-size: 14px;
-  line-height: 1.65;
-  opacity: 0.9;
-}
-
 /* CHARACTER */
 .character {
   width: 320px;
-  margin-left: -70px;
-  z-index: 4;
 }
 
 .character img {
@@ -218,7 +182,7 @@ p {
 .synopsis {
   position: absolute;
   right: 60px;
-  top: 170px;
+  top: 165px;
   width: 340px;
   padding: 28px;
   z-index: 5;
@@ -229,4 +193,10 @@ p {
   letter-spacing: 1px;
   color: var(--accent);
   margin-bottom: 12px;
+}
+
+.synopsis p {
+  font-size: 14px;
+  line-height: 1.65;
+  opacity: 0.9;
 }
