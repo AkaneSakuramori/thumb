@@ -1,9 +1,13 @@
 {
-  "title": "LI'L MISS VAMPIRE",
-  "subtitle": "CAN'T SUCK RIGHT",
-  "tag": "ONGOING ISLAND",
-  "synopsis": "A clumsy vampire girl struggles with her identity in a supernatural school comedy.",
-  "accentColor": "#F4A7B9",
-  "backgroundImage": "/assets/backgrounds/lil-miss-bg.jpg",
-  "characterImage": "/assets/characters/lil-miss.png"
+  "brand": "YOUR NAME",
+  "title": "Jack-of-All-Trades",
+  "subtitle": "Party of None",
+  "badge": "ONGOING",
+  "studio": "Animation Studio42",
+  "arc": "Winter 2026",
+  "genres": "Action, Adventure, Fantasy",
+  "synopsis": "Your synopsis text here...",
+  "accentColor": "#6fffd6",
+  "backgroundImage": "/assets/backgrounds/bg.jpg",
+  "characterImage": "/assets/characters/char.jpg"
 }
