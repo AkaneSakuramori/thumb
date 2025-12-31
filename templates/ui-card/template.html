@@ -2,8 +2,18 @@
 <html>
 <head>
   <meta charset="UTF-8">
+  <title>Anime Poster</title>
   <link rel="stylesheet" href="style.css">
+
+  <!-- Small override to keep blur VERY LIGHT -->
+  <style>
+    .bg-blur {
+      backdrop-filter: blur(2px); /* ~5% blur feel */
+      background: rgba(0,0,0,0.18);
+    }
+  </style>
 </head>
+
 <body>
 
 <div class="root">
@@ -13,77 +23,87 @@
   <div class="bg-blur"></div>
   <div class="bg-vignette"></div>
 
-  <!-- BRAND -->
-  <div class="brand">
-    <span class="menu">☰</span>
-    <span id="brand"></span>
-  </div>
+  <!-- CENTER COLUMN -->
+  <div class="center">
 
-  <!-- GENRES -->
-  <div class="genres" id="genres"></div>
+    <!-- BRAND -->
+    <div class="brand">
+      <span class="menu">☰</span>
+      <span id="brand"></span>
+    </div>
 
-  <!-- MAIN -->
-  <div class="main">
+    <!-- GENRES -->
+    <div class="genres" id="genres"></div>
 
-    <!-- INFO CARD (TITLE + META + SYNOPSIS) -->
-    <div class="glass info">
+    <!-- MAIN CONTENT -->
+    <div class="main">
 
-      <div class="badge" id="badge"></div>
+      <!-- INFO CARD -->
+      <div class="glass info">
 
-      <h1 id="title"></h1>
-      <h2 id="subtitle"></h2>
+        <div class="badge" id="badge"></div>
 
-      <div class="meta">
-        <div class="meta-dark">
-          <small>Studio</small>
-          <span id="studio"></span>
+        <h1 id="title"></h1>
+        <h2 id="subtitle"></h2>
+
+        <div class="meta">
+          <div class="meta-dark">
+            <small>Studio</small>
+            <span id="studio"></span>
+          </div>
+
+          <div class="meta-light">
+            <small>Arc</small>
+            <span id="arc"></span>
+          </div>
         </div>
-        <div class="meta-light">
-          <small>Arc</small>
-          <span id="arc"></span>
-        </div>
+
+        <!-- SYNOPSIS INSIDE MAIN BOX -->
+        <p class="synopsis-text" id="synopsis"></p>
+
       </div>
 
-      <!-- SYNOPSIS INSIDE MAIN BOX -->
-      <p class="synopsis-text" id="synopsis"></p>
+      <!-- CHARACTER IMAGE -->
+      <div class="character">
+        <img id="character" alt="Character">
+      </div>
 
-    </div>
-
-    <!-- CHARACTER -->
-    <div class="character">
-      <img id="character">
     </div>
 
   </div>
-
 </div>
 
+<!-- DATA LOADER -->
 <script>
 fetch("/data/poster.json")
-.then(r => r.json())
-.then(d => {
-  document.documentElement.style.setProperty("--accent", d.accentColor || "#6fffd6");
+  .then(res => res.json())
+  .then(d => {
 
-  document.querySelector(".bg").style.backgroundImage =
-    `url(${d.backgroundImage})`;
+    document.documentElement.style.setProperty(
+      "--accent",
+      d.accentColor || "#6fffd6"
+    );
 
-  brand.innerText = d.brand || "";
-  title.innerText = d.title || "";
-  subtitle.innerText = d.subtitle || "";
-  studio.innerText = d.studio || "";
-  arc.innerText = d.arc || "";
-  synopsis.innerText = d.synopsis || "";
-  badge.innerText = d.badge || "";
+    document.querySelector(".bg").style.backgroundImage =
+      `url(${d.backgroundImage})`;
 
-  character.src = d.characterImage;
+    document.getElementById("brand").innerText = d.brand || "";
+    document.getElementById("title").innerText = d.title || "";
+    document.getElementById("subtitle").innerText = d.subtitle || "";
+    document.getElementById("studio").innerText = d.studio || "";
+    document.getElementById("arc").innerText = d.arc || "";
+    document.getElementById("synopsis").innerText = d.synopsis || "";
+    document.getElementById("badge").innerText = d.badge || "";
 
-  if (d.genres) {
-    genres.innerHTML = d.genres
-      .split(",")
-      .map(g => `<span>${g.trim()}</span>`)
-      .join("");
-  }
-});
+    document.getElementById("character").src = d.characterImage;
+
+    if (d.genres) {
+      document.getElementById("genres").innerHTML =
+        d.genres.split(",")
+          .map(g => `<span>${g.trim()}</span>`)
+          .join("");
+    }
+  });
 </script>
 
 </body>
