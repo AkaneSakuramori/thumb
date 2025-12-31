@@ -50,28 +50,39 @@ body {
   z-index: 2;
 }
 
-/* BRAND */
-.brand {
+/* =========================
+   CENTER COLUMN SYSTEM
+========================= */
+
+.center {
   position: absolute;
   top: 26px;
-  left: 60px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 1100px; /* balanced canvas */
+  z-index: 5;
+}
+
+/* BRAND */
+.brand {
   display: flex;
   gap: 12px;
   padding: 14px 28px;
   background: rgba(30,41,59,0.7);
   border-radius: 40px;
   backdrop-filter: blur(16px);
-  z-index: 5;
+  width: fit-content;
+}
+
+.menu {
+  opacity: 0.8;
 }
 
 /* GENRES */
 .genres {
-  position: absolute;
-  top: 92px;
-  left: 80px;
+  margin-top: 22px;
   display: flex;
   gap: 14px;
-  z-index: 5;
 }
 
 .genres span {
@@ -85,13 +96,11 @@ body {
 
 /* MAIN CONTENT */
 .main {
-  position: absolute;
-  left: 80px;
-  top: 130px; /* MOVED UP */
+  margin-top: 28px; /* aligned with genres */
   display: flex;
   align-items: center;
-  gap: 70px; /* character slightly farther */
-  z-index: 5;
+  justify-content: space-between;
+  gap: 80px;
 }
 
 /* GLASS */
@@ -107,8 +116,8 @@ body {
 
 /* INFO CARD */
 .info {
-  width: 600px;
-  padding: 38px;
+  width: 620px;
+  padding: 40px;
 }
 
 /* BADGE */
@@ -171,12 +180,12 @@ h2 {
   font-size: 14px;
   line-height: 1.65;
   opacity: 0.9;
-  margin-top: 14px;
 }
 
 /* CHARACTER */
 .character {
   width: 320px;
+  flex-shrink: 0;
 }
 
 .character img {
