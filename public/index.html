@@ -1,39 +1,94 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Poster Generator</title>
+  <title>Anime Card Generator</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #0f1117;
+      color: white;
+      padding: 40px;
+    }
+
+    h2 {
+      margin-bottom: 20px;
+    }
+
+    form {
+      max-width: 520px;
+      background: #161a24;
+      padding: 24px;
+      border-radius: 16px;
+    }
+
+    input, textarea {
+      width: 100%;
+      padding: 12px;
+      margin-bottom: 14px;
+      border-radius: 10px;
+      border: none;
+      outline: none;
+      font-size: 14px;
+    }
+
+    textarea {
+      min-height: 100px;
+      resize: vertical;
+    }
+
+    label {
+      font-size: 13px;
+      opacity: 0.8;
+      margin-bottom: 6px;
+      display: block;
+    }
+
+    button {
+      width: 100%;
+      padding: 14px;
+      background: #6fffd6;
+      color: black;
+      font-weight: bold;
+      border: none;
+      border-radius: 12px;
+      cursor: pointer;
+      font-size: 15px;
+    }
+  </style>
 </head>
 <body>
-  <h2>Generate Anime Card</h2>
+
+  <h2>Generate Anime UI Card</h2>
 
   <form action="/generate" method="post" enctype="multipart/form-data">
 
-    <input name="title" placeholder="Title" required><br><br>
-    <input name="subtitle" placeholder="Subtitle / Season" required><br><br>
+    <input name="brand" placeholder="Brand Name (e.g. YOUR SITE NAME)" required>
 
-    <input name="badge" placeholder="Badge (ONGOING / UPCOMING)"><br><br>
+    <input name="title" placeholder="Anime Title" required>
 
-    <input name="nav" placeholder="Top Nav (HOME,ANIME,CHARACTERS,GALLERY)"><br><br>
+    <input name="subtitle" placeholder="Subtitle (Season / Part)" required>
 
-    <textarea name="synopsis" placeholder="Synopsis" required></textarea><br><br>
+    <input name="badge" placeholder="Badge (ONGOING / UPCOMING)">
 
-    <input name="genres" placeholder="Genres (Action,Fantasy,Romance)"><br><br>
+    <input name="studio" placeholder="Studio">
 
-    <input name="studio" placeholder="Studio (Project No.9)"><br><br>
-    <input name="status" placeholder="Status (Ongoing)"><br><br>
-    <input name="arc" placeholder="Arc / Season (Winter 2026)"><br><br>
-    <input name="rating" placeholder="Rating (6.7/10)"><br><br>
-    <input name="schedule" placeholder="Schedule (Saturday)"><br><br>
+    <input name="arc" placeholder="Arc / Season (Winter 2026)">
 
-    <input name="accentColor" placeholder="#6fffd6" required><br><br>
+    <textarea name="synopsis" placeholder="Synopsis" required></textarea>
 
-    <label>Background Image</label><br>
-    <input type="file" name="backgroundImage" accept="image/*" required><br><br>
+    <input name="genres" placeholder="Genres (Action, Adventure, Fantasy)">
 
-    <label>Preview / Character Image</label><br>
-    <input type="file" name="characterImage" accept="image/*" required><br><br>
+    <input name="accentColor" placeholder="Accent Color (#6fffd6)" value="#6fffd6" required>
 
-    <button type="submit">Generate</button>
+    <label>Background Image</label>
+    <input type="file" name="backgroundImage" accept="image/*" required>
+
+    <label>Character / Preview Image</label>
+    <input type="file" name="characterImage" accept="image/*" required>
+
+    <button type="submit">Generate Image</button>
+
   </form>
+
 </body>
 </html>
