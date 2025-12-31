@@ -1,19 +1,26 @@
 <!DOCTYPE html>
 <html>
 <head>
+  <meta charset="UTF-8">
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
 <div class="root">
-
-  <!-- BACKGROUND BLUR OVERLAY -->
   <div class="bg-blur"></div>
+
+  <!-- SIDEBAR -->
+  <div class="sidebar">
+    <div class="nav-item active">HOME</div>
+    <div class="nav-item">SEARCH</div>
+    <div class="nav-item">CATEGORY</div>
+    <div class="nav-item">FAVORITES</div>
+  </div>
 
   <!-- BRAND -->
   <div class="brand">
     <span class="menu">☰</span>
-    <span id="brandName"></span>
+    <span id="brand"></span>
   </div>
 
   <!-- GENRES -->
@@ -24,7 +31,6 @@
 
     <!-- INFO CARD -->
     <div class="glass info">
-
       <div class="badge" id="badge"></div>
 
       <h1 id="title"></h1>
@@ -35,29 +41,27 @@
           <small>Studio</small>
           <span id="studio"></span>
         </div>
-        <div>
+        <div class="light">
           <small>Arc</small>
           <span id="arc"></span>
         </div>
       </div>
 
       <p id="synopsis"></p>
-
     </div>
 
-    <!-- CHARACTER CARD -->
-    <div class="character">
+    <!-- CHARACTER -->
+    <div class="character-section">
       <img id="character">
     </div>
 
   </div>
 
-  <!-- RIGHT SYNOPSIS BOX -->
+  <!-- RIGHT SYNOPSIS -->
   <div class="glass synopsis-box">
     <h3>SYNOPSIS</h3>
     <p id="synopsisRight"></p>
   </div>
-
 </div>
 
 <script>
@@ -65,19 +69,17 @@ fetch("/data/poster.json")
 .then(r => r.json())
 .then(d => {
   document.body.style.backgroundImage = `url(${d.backgroundImage})`;
-  document.documentElement.style.setProperty("--accent", d.accentColor);
+  document.documentElement.style.setProperty("--accent", d.accentColor || "#6fffd6");
 
-  brandName.innerText = d.brand || "YOUR BRAND";
+  brand.innerText = d.brand || "";
 
-  title.innerText = d.title;
-  subtitle.innerText = d.subtitle;
-  synopsis.innerText = d.synopsis;
-  synopsisRight.innerText = d.synopsis;
-
-  badge.innerText = d.badge || "";
-
+  title.innerText = d.title || "";
+  subtitle.innerText = d.subtitle || "";
   studio.innerText = d.studio || "";
   arc.innerText = d.arc || "";
+  synopsis.innerText = d.synopsis || "";
+  synopsisRight.innerText = d.synopsis || "";
+  badge.innerText = d.badge || "";
 
   character.src = d.characterImage;
 
