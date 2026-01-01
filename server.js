@@ -12,7 +12,6 @@ app.use(express.json());
 
 app.use(express.static("public"));
 app.use("/assets", express.static("assets"));
-app.use("/fonts", express.static("fonts"));
 app.use("/data", express.static("data"));
 app.use("/templates", express.static("templates"));
 app.use("/output", express.static("output"));
@@ -39,17 +38,14 @@ app.post(
     const b = req.body;
 
     const posterData = {
+      brand: b.brand,
       title: b.title,
       subtitle: b.subtitle,
       badge: b.badge,
-      nav: b.nav,
+      studio: b.studio,
+      arc: b.arc,
       synopsis: b.synopsis,
       genres: b.genres,
-      studio: b.studio,
-      status: b.status,
-      arc: b.arc,
-      rating: b.rating,
-      schedule: b.schedule,
       accentColor: b.accentColor,
       backgroundImage: `/assets/backgrounds/${req.files.backgroundImage[0].filename}`,
       characterImage: `/assets/characters/${req.files.characterImage[0].filename}`
@@ -59,7 +55,7 @@ app.post(
 
     fs.writeFileSync("data/poster.json", JSON.stringify(posterData, null, 2));
 
-    await generatePoster("ui-card");
+    await generatePoster(b.style || "ui-card");
 
     res.redirect("/output/poster.png");
   }
