@@ -1,7 +1,7 @@
 import puppeteer from "puppeteer";
 import fs from "fs";
 
-export async function generatePoster(template = "default") {
+export async function generatePoster(template = "ui-card") {
   if (!fs.existsSync("output")) fs.mkdirSync("output");
 
   const browser = await puppeteer.launch({
