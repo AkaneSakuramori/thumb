@@ -1,138 +1,72 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Anime Card Generator</title>
-
-  <style>
-    body {
-      font-family: Arial, sans-serif;
-      background: #0f1117;
-      color: white;
-      padding: 40px;
-    }
-
-    h2 {
-      margin-bottom: 20px;
-    }
-
-    form {
-      max-width: 520px;
-      background: #161a24;
-      padding: 24px;
-      border-radius: 16px;
-    }
-
-    input, textarea {
-      width: 100%;
-      padding: 12px;
-      margin-bottom: 14px;
-      border-radius: 10px;
-      border: none;
-      outline: none;
-      font-size: 14px;
-    }
-
-    textarea {
-      min-height: 100px;
-      resize: vertical;
-    }
-
-    label {
-      font-size: 13px;
-      opacity: 0.8;
-      margin-bottom: 6px;
-      display: block;
-    }
-
-    button {
-      width: 100%;
-      padding: 14px;
-      background: #6fffd6;
-      color: black;
-      font-weight: bold;
-      border: none;
-      border-radius: 12px;
-      cursor: pointer;
-      font-size: 15px;
-      margin-top: 10px;
-    }
-
-    .color-row {
-      display: flex;
-      gap: 12px;
-      align-items: center;
-    }
-
-    .color-row input[type="color"] {
-      width: 60px;
-      height: 44px;
-      padding: 0;
-      border-radius: 10px;
-      cursor: pointer;
-    }
-  </style>
+  <meta charset="UTF-8">
+  <link rel="stylesheet" href="style.css">
 </head>
-
 <body>
 
-  <h2>Generate Anime UI Card</h2>
+<div class="root">
+  <div class="bg"></div>
 
-  <form action="/generate" method="post" enctype="multipart/form-data">
+  <div class="center">
 
-    <input name="brand" placeholder="Brand Name (YOUR SITE NAME)" required>
-
-    <input name="title" placeholder="Anime Title" required>
-
-    <input name="subtitle" placeholder="Subtitle (Season / Part)" required>
-
-    <input name="badge" placeholder="Badge (ONGOING / UPCOMING)">
-
-    <input name="studio" placeholder="Studio">
-
-    <input name="arc" placeholder="Arc / Season (Winter 2026)">
-
-    <textarea name="synopsis" placeholder="Synopsis" required></textarea>
-
-    <input name="genres" placeholder="Genres (Action, Adventure, Fantasy)">
-
-    <!-- COLOR PICKER -->
-    <label>Accent Color</label>
-    <div class="color-row">
-      <input type="color" id="colorPicker" value="#6fffd6">
-      <input
-        name="accentColor"
-        id="accentColor"
-        placeholder="#6fffd6"
-        value="#6fffd6"
-        required
-      >
+    <div class="brand">
+      <span>☰</span>
+      <strong id="brand"></strong>
     </div>
 
-    <label>Background Image</label>
-    <input type="file" name="backgroundImage" accept="image/*" required>
+    <div class="genres" id="genres"></div>
 
-    <label>Character / Preview Image</label>
-    <input type="file" name="characterImage" accept="image/*" required>
+    <div class="main">
+      <div class="glass info">
+        <div class="badge" id="badge"></div>
+        <h1 id="title"></h1>
+        <h2 id="subtitle"></h2>
 
-    <button type="submit">Generate Image</button>
+        <div class="meta">
+          <div class="meta-dark">
+            <small>Studio</small>
+            <span id="studio"></span>
+          </div>
+          <div class="meta-light">
+            <small>Arc</small>
+            <span id="arc"></span>
+          </div>
+        </div>
 
-  </form>
+        <p class="synopsis-text" id="synopsis"></p>
+      </div>
 
-  <!-- COLOR SYNC SCRIPT -->
-  <script>
-    const picker = document.getElementById("colorPicker");
-    const input = document.getElementById("accentColor");
+      <div class="character">
+        <img id="character">
+      </div>
+    </div>
 
-    picker.addEventListener("input", () => {
-      input.value = picker.value;
-    });
+  </div>
+</div>
 
-    input.addEventListener("input", () => {
-      if (input.value.startsWith("#")) {
-        picker.value = input.value;
-      }
-    });
-  </script>
+<script>
+fetch("/data/poster.json")
+.then(r => r.json())
+.then(d => {
+  document.documentElement.style.setProperty("--accent", d.accentColor);
+  document.querySelector(".bg").style.backgroundImage = `url(${d.backgroundImage})`;
+
+  brand.innerText = d.brand;
+  title.innerText = d.title;
+  subtitle.innerText = d.subtitle;
+  studio.innerText = d.studio;
+  arc.innerText = d.arc;
+  synopsis.innerText = d.synopsis;
+  badge.innerText = d.badge;
+  character.src = d.characterImage;
+
+  genres.innerHTML = d.genres
+    ? d.genres.split(",").map(g => `<span>${g.trim()}</span>`).join("")
+    : "";
+});
+</script>
 
 </body>
 </html>
