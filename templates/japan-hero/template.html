@@ -10,24 +10,32 @@
   <div class="bg"></div>
 
   <div class="card">
-    <nav>
+
+    <!-- TOP NAV -->
+    <nav class="nav">
       <span>HOME</span>
       <span>ABOUT</span>
       <span>NEWS</span>
       <span>CONTACT</span>
     </nav>
 
-    <div class="content">
+    <!-- HERO CONTENT -->
+    <div class="hero">
+
+      <!-- TEXT -->
       <div class="text">
         <h1 id="title"></h1>
         <p id="synopsis"></p>
         <button>Get Started</button>
       </div>
 
-      <div class="art">
+      <!-- IMAGE -->
+      <div class="image">
         <img id="character">
       </div>
+
     </div>
+
   </div>
 </div>
 
@@ -35,7 +43,9 @@
 fetch("/data/poster.json")
 .then(r => r.json())
 .then(d => {
-  document.querySelector(".bg").style.backgroundImage = `url(${d.backgroundImage})`;
+  document.querySelector(".bg").style.backgroundImage =
+    `url(${d.backgroundImage})`;
+
   title.innerText = d.title;
   synopsis.innerText = d.synopsis;
   character.src = d.characterImage;
